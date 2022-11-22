@@ -13,12 +13,14 @@ export default function App() {
     SplashScreen.hide();
   }, []);
 
+  // set local variables states
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const [lapTime, setLapTime] = useState(null);
   const [laps, setLaps] = useState([]);
 
+  // timer handler incrementor
   useEffect(() => {
     let interval = null;
 
@@ -33,21 +35,26 @@ export default function App() {
     return () => clearInterval(interval);
   }, [isActive, isPaused]);
 
+  // start timer
   const _handleStart = () => {
     setIsActive(true);
     setIsPaused(false);
   };
 
+  // toggle pause and resume timer
   const _togglePauseResume = () => {
     setIsPaused(!isPaused);
   };
 
+  // reset timer
   const _handleReset = () => {
     setIsActive(false);
     setIsPaused(false);
     setTimer(0);
     setLaps([]);
   };
+
+  // handle timer laps
   const _handleLap = () => {
     let formattedTime = `${formatTime(timer).minutes}:${
       formatTime(timer).seconds
@@ -58,6 +65,7 @@ export default function App() {
     setLapTime(formattedTime);
   };
 
+  // update timer laps array after it set from the _handleLap() function
   useEffect(() => {
     if (lapTime === null) {
       return;

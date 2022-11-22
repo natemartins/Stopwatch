@@ -5,14 +5,8 @@ import Laps from './src/components/Laps';
 import Timer from './src/components/Timer';
 import {formatTime} from './src/modules/formatTime';
 import colors from './src/utils/colors';
-import SplashScreen from 'react-native-splash-screen';
 
 export default function App() {
-  // hide splashscreen after app initialisation
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
   const [timer, setTimer] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
@@ -78,8 +72,8 @@ export default function App() {
           isActive={isActive}
           isPaused={isPaused}
         />
+        <Laps laps={laps} />
       </View>
-      <Laps laps={laps} />
     </View>
   );
 }
@@ -87,17 +81,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: `${colors.primary}30`,
+    backgroundColor: colors.background,
   },
   content: {
     flex: 1,
+    justifyContent: 'space-evenly',
   },
   title: {
     color: colors.gray,
-    textTransform: 'uppercase',
-    fontFamily: 'Electrolize',
     alignSelf: 'center',
     marginTop: 25,
-    fontSize: 16,
+    fontSize: 18,
   },
 });
